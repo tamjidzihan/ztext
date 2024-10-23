@@ -2,25 +2,17 @@ import { AppProvider } from '@toolpad/core/AppProvider';
 import { DashboardLayout } from '@toolpad/core/DashboardLayout';
 import { PageContainer } from '@toolpad/core/PageContainer';
 import DashboardPage from './pages/DashboardPage';
-import { NAVIGATION } from './router/NAVIGATION';
+import { NAVIGATION } from './components/NAVIGATION';
 import { useRouter } from './router/router';
 import { CustomTheme } from './theme/Theme';
 import OrdersPage from './pages/OrdersPage';
-import ztext_logo from './assets/ztext_logo.png'
-import { Box } from '@mui/material';
-
+import { branding } from './theme/Branding';
+import AuthPage from './pages/AuthPage';
+import { useAuth } from './hooks/useAuth';
 
 const App = () => {
+  const { user } = useAuth()
   const router = useRouter('');
-
-  const branding = {
-    title: 'Ztext', // Your brand title here
-    logo: (
-      <Box display="flex" alignItems="center">
-        <img src={ztext_logo} alt="Ztext Logo" style={{ width: '40px' }} />
-      </Box>
-    ),
-  };
 
   return (
     <AppProvider
@@ -29,12 +21,16 @@ const App = () => {
       theme={CustomTheme}
       branding={branding}
     >
-      <DashboardLayout>
-        <PageContainer>
-          {router.pathname === '/dashboard' && <DashboardPage />}
-          {router.pathname === '/orders' && <OrdersPage />}
-        </PageContainer>
-      </DashboardLayout>
+      {user
+        ? <DashboardLayout>
+          <PageContainer>
+            {router.pathname === '/dashboard' && <DashboardPage />}
+            {router.pathname === '/orders' && <OrdersPage />}
+
+          </PageContainer>
+        </DashboardLayout>
+        : < AuthPage />
+      }
     </AppProvider>
   );
 }

@@ -1,11 +1,18 @@
 import { Navigation } from '@toolpad/core/AppProvider';
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import DescriptionIcon from '@mui/icons-material/Description';
-import LayersIcon from '@mui/icons-material/Layers';
-import { MenuBook, Store, TrafficRounded } from '@mui/icons-material';
+import { Box } from '@mui/material';
+import { useAuth } from '../hooks/useAuth';
 
+
+// eslint-disable-next-line react-refresh/only-export-components
+const LogoutButton = () => {
+    const { logOut } = useAuth()
+    return (
+        <Box onClick={logOut}>LogOut</Box>
+    )
+}
 
 export const NAVIGATION: Navigation = [
     {
@@ -16,11 +23,6 @@ export const NAVIGATION: Navigation = [
         segment: 'dashboard',
         title: 'Dashboard',
         icon: <DashboardIcon />,
-    },
-    {
-        segment: 'orders',
-        title: 'Orders',
-        icon: <ShoppingCartIcon />,
     },
 
     {
@@ -49,37 +51,7 @@ export const NAVIGATION: Navigation = [
         ],
     },
     {
-        segment: 'integrations',
-        title: 'Integrations',
-        icon: <LayersIcon />,
+        kind: 'page',
+        action: <LogoutButton />
     },
-
-
-    {
-        kind: 'divider'
-    },
-
-
-    {
-        kind: 'header',
-        title: 'Book Space'
-    },
-    {
-        segment: 'bookshop',
-        title: 'Book Shop',
-        icon: <MenuBook />,
-        children: [
-            {
-                segment: 'store',
-                title: 'Store',
-                icon: <Store />,
-            },
-            {
-                segment: 'traffic',
-                title: 'Traffic',
-                icon: <TrafficRounded />,
-            },
-        ],
-    },
-
 ];
