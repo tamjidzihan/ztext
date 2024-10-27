@@ -1,15 +1,15 @@
 import { AppProvider, AuthenticationContext, SessionContext } from '@toolpad/core/AppProvider';
 import { DashboardLayout } from '@toolpad/core/DashboardLayout';
 import { PageContainer } from '@toolpad/core/PageContainer';
-import DashboardPage from './pages/DashboardPage';
-import { NAVIGATION } from './components/NavigationBar'
-import { useRouter } from './router/router';
-import { CustomTheme } from './theme/Theme';
-import { branding } from './theme/Branding';
-import AuthPage from './pages/AuthPage';
-import { useAuth } from './hooks/useAuth';
 import Loading from './components/Loading';
+import { NAVIGATION } from './components/NavigationBar';
+import { useAuth } from './hooks/useAuth';
+import AuthPage from './pages/AuthPage';
 import BrowsePost from './pages/BrowsePost';
+import DashboardPage from './pages/DashboardPage';
+import { useRouter } from './router/router';
+import { branding } from './theme/Branding';
+import { CustomTheme } from './theme/Theme';
 
 const App = () => {
   const { user, loading, signInWithGoogle, logOut } = useAuth();

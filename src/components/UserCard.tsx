@@ -55,7 +55,7 @@ export const InteractiveCard = () => {
                     alignItems: "center",
                     justifyContent: "space-between",
                     flexDirection: "row-reverse",
-                    mt: "1rem"
+                    m: "1rem"
                 }}
             >
                 <Box>
