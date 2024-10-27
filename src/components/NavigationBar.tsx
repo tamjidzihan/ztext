@@ -2,17 +2,9 @@ import { Navigation } from '@toolpad/core/AppProvider';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import DescriptionIcon from '@mui/icons-material/Description';
-import { Box } from '@mui/material';
-import { useAuth } from '../hooks/useAuth';
+import BrowserUpdatedIcon from '@mui/icons-material/BrowserUpdated';
+import PageviewIcon from '@mui/icons-material/Pageview';
 
-
-// eslint-disable-next-line react-refresh/only-export-components
-const LogoutButton = () => {
-    const { logOut } = useAuth()
-    return (
-        <Box onClick={logOut}>LogOut</Box>
-    )
-}
 
 export const NAVIGATION: Navigation = [
     {
@@ -24,7 +16,11 @@ export const NAVIGATION: Navigation = [
         title: 'Dashboard',
         icon: <DashboardIcon />,
     },
-
+    {
+        segment: 'search',
+        title: 'Search',
+        icon: <PageviewIcon />,
+    },
     {
         kind: 'divider',
     },
@@ -34,8 +30,13 @@ export const NAVIGATION: Navigation = [
         title: 'Analytics',
     },
     {
-        segment: 'reports',
-        title: 'Reports',
+        segment: 'browsepost',
+        title: 'Browse Post',
+        icon: <BrowserUpdatedIcon />,
+    },
+    {
+        segment: 'explore',
+        title: 'Explore',
         icon: <BarChartIcon />,
         children: [
             {
@@ -49,9 +50,5 @@ export const NAVIGATION: Navigation = [
                 icon: <DescriptionIcon />,
             },
         ],
-    },
-    {
-        kind: 'page',
-        action: <LogoutButton />
-    },
+    }
 ];

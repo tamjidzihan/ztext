@@ -18,6 +18,7 @@ export const useAuth = () => {
         })
         return () => authState()
     }, [])
+
     const signInWithGoogle = async () => {
         try {
             const result = await signInWithPopup(auth, googleProvider);
