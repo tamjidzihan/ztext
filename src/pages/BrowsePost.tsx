@@ -8,8 +8,8 @@ const BrowsePost = () => {
 
     return (
         <Grid container spacing={2}>
-            {loops.map(() =>
-                <Grid size={{ sm: 12, md: 6, lg: 4 }} mb={3} >
+            {loops.map((_num, index) =>
+                <Grid size={{ sm: 12, md: 6, lg: 4 }} mb={3} key={index}>
                     <InteractiveCard />
                 </Grid>
             )

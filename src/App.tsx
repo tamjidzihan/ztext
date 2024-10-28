@@ -10,10 +10,12 @@ import DashboardPage from './pages/DashboardPage';
 import { useRouter } from './router/router';
 import { branding } from './theme/Branding';
 import { CustomTheme } from './theme/Theme';
+import SearchPage from './pages/SearchPage';
+import HomePage from './pages/HomePage';
 
 const App = () => {
   const { user, loading, signInWithGoogle, logOut } = useAuth();
-  const router = useRouter('');
+  const router = useRouter('/');
 
   const authentication = {
     signIn: signInWithGoogle,
@@ -31,7 +33,6 @@ const App = () => {
       : undefined,
   };
 
-
   if (loading) return <Loading />;
 
   return (
@@ -46,7 +47,9 @@ const App = () => {
           {user
             ? <DashboardLayout>
               <PageContainer>
+                {router.pathname === '/' && <HomePage />}
                 {router.pathname === '/dashboard' && <DashboardPage />}
+                {router.pathname === '/search' && <SearchPage />}
                 {router.pathname === '/browsepost' && <BrowsePost />}
 
               </PageContainer>
