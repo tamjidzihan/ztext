@@ -1,9 +1,8 @@
-import { Navigation } from '@toolpad/core/AppProvider';
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import BarChartIcon from '@mui/icons-material/BarChart';
-import DescriptionIcon from '@mui/icons-material/Description';
+import { TerminalOutlined, Toc, TrafficOutlined } from '@mui/icons-material';
 import BrowserUpdatedIcon from '@mui/icons-material/BrowserUpdated';
+import DashboardIcon from '@mui/icons-material/Dashboard';
 import PageviewIcon from '@mui/icons-material/Pageview';
+import { Navigation } from '@toolpad/core/AppProvider';
 
 
 export const NAVIGATION: Navigation = [
@@ -35,19 +34,19 @@ export const NAVIGATION: Navigation = [
         icon: <BrowserUpdatedIcon />,
     },
     {
-        segment: 'explore',
-        title: 'Explore',
-        icon: <BarChartIcon />,
+        segment: 'collections',
+        title: 'Collections',
+        icon: <Toc />,
         children: [
             {
-                segment: 'sales',
-                title: 'Sales',
-                icon: <DescriptionIcon />,
+                segment: 'code',
+                title: 'Code',
+                icon: <TerminalOutlined />,
             },
             {
                 segment: 'traffic',
                 title: 'Traffic',
-                icon: <DescriptionIcon />,
+                icon: <TrafficOutlined />,
             },
         ],
     }

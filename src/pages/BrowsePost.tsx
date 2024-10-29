@@ -1,5 +1,5 @@
 import Grid from '@mui/material/Grid2';
-import { InteractiveCard } from '../components/UserCard';
+import { PostCard } from '../components/PostCard';
 // import { Typography } from '@mui/material';
 
 const BrowsePost = () => {
@@ -10,7 +10,7 @@ const BrowsePost = () => {
         <Grid container spacing={2}>
             {loops.map((_num, index) =>
                 <Grid size={{ sm: 12, md: 6, lg: 4 }} mb={3} key={index}>
-                    <InteractiveCard />
+                    <PostCard email='demo2@email.com' password='123456' />
                 </Grid>
             )
             }
