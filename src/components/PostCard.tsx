@@ -1,21 +1,21 @@
-import { useState } from "react";
 import {
-    Card,
-    Box,
-    IconButton,
-    CardHeader,
-    Avatar,
-    CardContent,
-    Tooltip,
-    TextField
-} from "@mui/material";
-import {
-    MoreVert,
     ContentCopyOutlined,
+    MoreVert,
     Visibility,
-    VisibilityOff,
-    DriveFileRenameOutline
+    VisibilityOff
 } from "@mui/icons-material";
+import {
+    Avatar,
+    Box,
+    Button,
+    Card,
+    CardContent,
+    CardHeader,
+    IconButton,
+    TextField,
+    Tooltip
+} from "@mui/material";
+import { useState } from "react";
 import PostCardModel from "./ModelPostCard";
 
 interface EmailCardProps {
@@ -54,7 +54,6 @@ export const PostCard = ({ email, password }: EmailCardProps) => {
                     width: "100%",
                     borderRadius: '20px',
                     '&:hover': {
-                        cursor: 'pointer',
                         bgcolor: 'action.hover'
                     }
                 }} >
@@ -127,13 +126,14 @@ export const PostCard = ({ email, password }: EmailCardProps) => {
                         alignItems: "center",
                         justifyContent: "space-between",
                         flexDirection: "row-reverse",
-                        m: "0  1rem  1rem"
+                        m: "0  1rem  1rem",
+
                     }}
                 >
-                    <Box>
-                        <IconButton>
-                            <DriveFileRenameOutline onClick={handleOpen} />
-                        </IconButton>
+                    <Box onClick={handleOpen}>
+                        <Button>
+                            More
+                        </Button>
                     </Box>
                 </Box>
             </Card>
