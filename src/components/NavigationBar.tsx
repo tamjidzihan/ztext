@@ -29,8 +29,8 @@ export const NAVIGATION: Navigation = [
         title: 'Analytics',
     },
     {
-        segment: 'browsepost',
-        title: 'Browse Post',
+        segment: 'authinfo',
+        title: 'Authentication info',
         icon: <BrowserUpdatedIcon />,
     },
     {

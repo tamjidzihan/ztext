@@ -5,7 +5,7 @@ import Loading from './components/Loading';
 import { NAVIGATION } from './components/NavigationBar';
 import { useAuth } from './hooks/useAuth';
 import AuthPage from './pages/AuthPage';
-import BrowsePost from './pages/BrowsePost';
+import AuthInfo from './pages/AuthInfo';
 import DashboardPage from './pages/DashboardPage';
 import { useRouter } from './router/router';
 import { branding } from './theme/Branding';
@@ -50,7 +50,7 @@ const App = () => {
                 {router.pathname === '/' && <HomePage />}
                 {router.pathname === '/dashboard' && <DashboardPage />}
                 {router.pathname === '/search' && <SearchPage />}
-                {router.pathname === '/browsepost' && <BrowsePost />}
+                {router.pathname === '/authinfo' && <AuthInfo />}
 
               </PageContainer>
             </DashboardLayout>
