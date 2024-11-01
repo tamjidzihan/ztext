@@ -2,6 +2,7 @@ import { TerminalOutlined, Toc, TrafficOutlined } from '@mui/icons-material';
 import BrowserUpdatedIcon from '@mui/icons-material/BrowserUpdated';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PageviewIcon from '@mui/icons-material/Pageview';
+import NoteAddIcon from '@mui/icons-material/NoteAdd';
 import { Navigation } from '@toolpad/core/AppProvider';
 
 
@@ -16,6 +17,11 @@ export const NAVIGATION: Navigation = [
         icon: <DashboardIcon />,
     },
     {
+        segment: 'createauthinfo',
+        title: 'Create new Auth-Info',
+        icon: <NoteAddIcon />,
+    },
+    {
         segment: 'search',
         title: 'Search',
         icon: <PageviewIcon />,
@@ -26,16 +32,16 @@ export const NAVIGATION: Navigation = [
 
     {
         kind: 'header',
-        title: 'Analytics',
+        title: 'Browse',
     },
     {
         segment: 'authinfo',
-        title: 'Authentication info',
+        title: 'Browse Authentication info',
         icon: <BrowserUpdatedIcon />,
     },
     {
         segment: 'collections',
-        title: 'Collections',
+        title: 'Browse Collections',
         icon: <Toc />,
         children: [
             {

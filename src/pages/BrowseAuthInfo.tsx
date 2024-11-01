@@ -2,7 +2,7 @@ import Grid from '@mui/material/Grid2';
 import { PostCard } from '../components/PostCard/PostCard';
 import { Box } from '@mui/material';
 
-const AuthInfo = () => {
+const BrowseAuthInfo = () => {
     const loops = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
 
 
@@ -23,4 +23,4 @@ const AuthInfo = () => {
     )
 }
 
-export default AuthInfo
+export default BrowseAuthInfo

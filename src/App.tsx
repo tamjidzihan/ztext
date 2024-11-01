@@ -5,13 +5,14 @@ import Loading from './components/Loading';
 import { NAVIGATION } from './components/NavigationBar';
 import { useAuth } from './hooks/useAuth';
 import AuthPage from './pages/AuthPage';
-import AuthInfo from './pages/AuthInfo';
+import AuthInfo from './pages/BrowseAuthInfo';
 import DashboardPage from './pages/DashboardPage';
 import { useRouter } from './router/router';
 import { branding } from './theme/Branding';
 import { CustomTheme } from './theme/Theme';
 import SearchPage from './pages/SearchPage';
 import HomePage from './pages/HomePage';
+import CreateAuthInfoPage from './pages/CreateAuthInfoPage';
 
 const App = () => {
   const { user, loading, signInWithGoogle, logOut } = useAuth();
@@ -49,6 +50,7 @@ const App = () => {
               <PageContainer>
                 {router.pathname === '/' && <HomePage />}
                 {router.pathname === '/dashboard' && <DashboardPage />}
+                {router.pathname === '/createauthinfo' && <CreateAuthInfoPage />}
                 {router.pathname === '/search' && <SearchPage />}
                 {router.pathname === '/authinfo' && <AuthInfo />}
 
