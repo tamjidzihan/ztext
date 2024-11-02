@@ -5,9 +5,11 @@ import { useAuth } from "./useAuth";
 
 export interface AuthInfoProps {
     id: string
+    website: string
     username: string
     email: string
     password: string
+    otherInfo: string
 }
 
 export const useDB = () => {
@@ -32,19 +34,37 @@ export const useDB = () => {
     }, [user?.uid])
 
 
-    const postAuthInfo = async (userName: string, email: string, password: string): Promise<AuthInfoProps | null> => {
+    const postAuthInfo = async (
+        //Follow this order Strictly as it is
+        // website
+        // userName
+        // email
+        // password
+        // otherInfo
+
+        website: string,
+        userName: string,
+        email: string,
+        password: string,
+        otherInfo: string
+    ): Promise<AuthInfoProps | null> => {
         if (user?.uid) {
             try {
                 const docRef = await addDoc(collection(db, userCollection, user.uid, authCollectionName), {
                     username: userName,
                     email: email,
-                    password: password
+                    password: password,
+                    website: website,
+                    otherInfo: otherInfo
                 });
+
                 return {
                     id: docRef.id,
                     username: userName,
                     email: email,
-                    password: password
+                    password: password,
+                    website: website,
+                    otherInfo: otherInfo
                 };
             } catch (error) {
                 console.error("Error adding todo:", error);
