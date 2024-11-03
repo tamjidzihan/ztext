@@ -1,20 +1,26 @@
 import Grid from '@mui/material/Grid2';
 import { PostCard } from '../components/PostCard/PostCard';
 import { Box } from '@mui/material';
+import { useDB } from '../hooks/useFirebase';
 
 const BrowseAuthInfo = () => {
-    const loops = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+    const { authInfos, category } = useDB()
 
 
     return (
         <Box>
             <Grid container spacing={2}>
-                {loops.map((_num, index) =>
+                {authInfos.map((data, index) =>
                     <Grid size={{ sm: 12, md: 6, lg: 4 }} mb={3} key={index}>
                         <PostCard
-                            email='demo2@email.com'
-                            password='123456'
-                            userName='tamjizihan' />
+                            // catagory={category.map((cat) => {
+                            //     if (cat.id === data.category)
+                            //         cat.category
+                            // })}
+                            website={data.website}
+                            email={data.email}
+                            password={data.password}
+                            userName={data.username} />
                     </Grid>
                 )
                 }

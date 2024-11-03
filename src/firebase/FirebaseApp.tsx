@@ -19,3 +19,4 @@ export const auth = getAuth(app);
 export const googleProvider = new GoogleAuthProvider();
 export const userCollection = "user"
 export const authCollectionName = "authinfo"
+export const categoryCollection = "category"

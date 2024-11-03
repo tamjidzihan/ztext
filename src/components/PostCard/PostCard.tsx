@@ -18,12 +18,14 @@ import Password from "./Password";
 import UserName from "./UserName";
 
 interface EmailCardProps {
+    website: string;
     email: string;
     password: string;
     userName: string;
+    catagory: string
 }
 
-export const PostCard = ({ email, password, userName }: EmailCardProps) => {
+export const PostCard = ({ email, password, userName, website, catagory }: EmailCardProps) => {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -43,8 +45,8 @@ export const PostCard = ({ email, password, userName }: EmailCardProps) => {
                 <CardHeader
                     avatar={<Avatar aria-label="recipe" onClick={handleOpen}>T</Avatar>}
                     action={<IconButton aria-label="settings"><MoreVert /></IconButton>}
-                    title={<Typography onClick={handleOpen}>Software Technologies</Typography>}
-                    subheader="TypeScript"
+                    title={<Typography onClick={handleOpen} variant="h5">{website}</Typography>}
+                    subheader={catagory}
                     sx={{ cursor: 'pointer' }}
                 />
                 <CardContent>

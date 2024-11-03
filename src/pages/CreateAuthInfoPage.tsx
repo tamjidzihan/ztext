@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
-import { TextField, Button, Box, Typography, SnackbarCloseReason } from '@mui/material';
+import { TextField, Button, Box, Typography, SnackbarCloseReason, Select, MenuItem, SelectChangeEvent } from '@mui/material';
 import { useDB } from '../hooks/useFirebase';
 import Notification from '../components/Notification';
 import { CustomTextareaAutosize } from '../theme/customization/CustomTextareaAutosize';
 
 const CreateAuthInfoPage: React.FC = () => {
-    const { postAuthInfo } = useDB();
+    const { postAuthInfo, category } = useDB();
     const [formData, setFormData] = useState({
         website: '',
         username: '',
         email: '',
         password: '',
-        otherInfo: ''
+        otherInfo: '',
+        categoryId: ''
     });
     const [notificationOpen, setNotificationOpen] = useState(false);
     const [notificationMessage, setNotificationMessage] = useState('');
@@ -23,6 +24,13 @@ const CreateAuthInfoPage: React.FC = () => {
         setFormData({
             ...formData,
             [name]: value,
+        });
+    };
+    // Updated handler for category selection
+    const handleCategoryChange = (event: SelectChangeEvent<string>) => {
+        setFormData({
+            ...formData,
+            categoryId: event.target.value, // Update categoryId in formData
         });
     };
 
@@ -45,6 +53,7 @@ const CreateAuthInfoPage: React.FC = () => {
         }
         await postAuthInfo(
             formData.website,
+            formData.categoryId,
             formData.username,
             formData.email,
             formData.password,
@@ -53,7 +62,7 @@ const CreateAuthInfoPage: React.FC = () => {
         setNotificationMessage(`${formData.username}: Auth Info created`);
         setNotificationOpen(true);
 
-        setFormData({ username: '', email: '', password: '', website: '', otherInfo: '' });
+        setFormData({ username: '', email: '', password: '', website: '', otherInfo: '', categoryId: '' });
         setKey((prevKey) => prevKey + 1);
     };
 
@@ -82,6 +91,26 @@ const CreateAuthInfoPage: React.FC = () => {
                     onChange={handleChange}
                     sx={{ mb: 2 }}
                 />
+                {/* Dropdown for Category */}
+                <Select
+                    fullWidth
+                    name="categoryId"
+                    value={formData.categoryId}
+                    onChange={handleCategoryChange}
+                    displayEmpty
+                    sx={{ mb: 2 }}
+                >
+                    <MenuItem value="" disabled>
+                        Select Category
+                    </MenuItem>
+                    {category.map((cat) => (
+                        <MenuItem key={cat.id} value={cat.id}>
+                            {cat.category}
+                        </MenuItem>
+                    ))}
+                </Select>
+
+
                 <TextField
                     label="Username"
                     variant="outlined"

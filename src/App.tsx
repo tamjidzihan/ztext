@@ -13,6 +13,7 @@ import { CustomTheme } from './theme/Theme';
 import SearchPage from './pages/SearchPage';
 import HomePage from './pages/HomePage';
 import CreateAuthInfoPage from './pages/CreateAuthInfoPage';
+import CreateCategoryPage from './pages/CreateCategoryPage';
 
 const App = () => {
   const { user, loading, signInWithGoogle, logOut } = useAuth();
@@ -51,6 +52,7 @@ const App = () => {
                 {router.pathname === '/' && <HomePage />}
                 {router.pathname === '/dashboard' && <DashboardPage />}
                 {router.pathname === '/createauthinfo' && <CreateAuthInfoPage />}
+                {router.pathname === '/createcategory' && <CreateCategoryPage />}
                 {router.pathname === '/search' && <SearchPage />}
                 {router.pathname === '/authinfo' && <AuthInfo />}
 

@@ -1,4 +1,4 @@
-import { TerminalOutlined, Toc, TrafficOutlined } from '@mui/icons-material';
+import { CategoryRounded, TerminalOutlined, Toc, TrafficOutlined } from '@mui/icons-material';
 import BrowserUpdatedIcon from '@mui/icons-material/BrowserUpdated';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PageviewIcon from '@mui/icons-material/Pageview';
@@ -22,6 +22,11 @@ export const NAVIGATION: Navigation = [
         icon: <NoteAddIcon />,
     },
     {
+        segment: 'createcategory',
+        title: 'Create new Categry',
+        icon: <CategoryRounded />,
+    },
+    {
         segment: 'search',
         title: 'Search',
         icon: <PageviewIcon />,
@@ -40,8 +45,8 @@ export const NAVIGATION: Navigation = [
         icon: <BrowserUpdatedIcon />,
     },
     {
-        segment: 'collections',
-        title: 'Browse Collections',
+        segment: 'catagory',
+        title: 'Browse Catagory',
         icon: <Toc />,
         children: [
             {
