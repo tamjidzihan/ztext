@@ -6,6 +6,9 @@ import { useDB } from '../hooks/useFirebase';
 const BrowseAuthInfo = () => {
     const { authInfos, category } = useDB()
 
+    const getCategoryName = (categoryId: string) => {
+        return category.find((cat) => cat.id === categoryId)?.category || 'Unknown Category';
+    };
 
     return (
         <Box>
@@ -13,10 +16,7 @@ const BrowseAuthInfo = () => {
                 {authInfos.map((data, index) =>
                     <Grid size={{ sm: 12, md: 6, lg: 4 }} mb={3} key={index}>
                         <PostCard
-                            // catagory={category.map((cat) => {
-                            //     if (cat.id === data.category)
-                            //         cat.category
-                            // })}
+                            catagory={getCategoryName(data.category)}
                             website={data.website}
                             email={data.email}
                             password={data.password}

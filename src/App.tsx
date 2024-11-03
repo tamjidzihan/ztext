@@ -2,22 +2,23 @@ import { AppProvider, AuthenticationContext, SessionContext } from '@toolpad/cor
 import { DashboardLayout } from '@toolpad/core/DashboardLayout';
 import { PageContainer } from '@toolpad/core/PageContainer';
 import Loading from './components/Loading';
-import { NAVIGATION } from './components/NavigationBar';
+import { useDynamicNavigation } from './components/NavigationBar';
 import { useAuth } from './hooks/useAuth';
 import AuthPage from './pages/AuthPage';
 import AuthInfo from './pages/BrowseAuthInfo';
+import CreateAuthInfoPage from './pages/CreateAuthInfoPage';
+import CreateCategoryPage from './pages/CreateCategoryPage';
 import DashboardPage from './pages/DashboardPage';
+import HomePage from './pages/HomePage';
+import SearchPage from './pages/SearchPage';
 import { useRouter } from './router/router';
 import { branding } from './theme/Branding';
 import { CustomTheme } from './theme/Theme';
-import SearchPage from './pages/SearchPage';
-import HomePage from './pages/HomePage';
-import CreateAuthInfoPage from './pages/CreateAuthInfoPage';
-import CreateCategoryPage from './pages/CreateCategoryPage';
 
 const App = () => {
   const { user, loading, signInWithGoogle, logOut } = useAuth();
   const router = useRouter('/');
+  const NAVIGATION = useDynamicNavigation();
 
   const authentication = {
     signIn: signInWithGoogle,
