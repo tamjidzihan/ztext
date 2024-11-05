@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { CategoryRounded, Toc } from '@mui/icons-material';
 import SpeakerNotesIcon from '@mui/icons-material/SpeakerNotes';
 import BrowserUpdatedIcon from '@mui/icons-material/BrowserUpdated';
@@ -79,7 +80,7 @@ export const useDynamicNavigation = () => {
             navigationCopy[navigationCopy.length - 1] = updatedNavigation; // Replace last item with updated
             return navigationCopy;
         });
-    }, [category, dynamicNavigation]);
+    }, [category]);
 
     return dynamicNavigation;
 };

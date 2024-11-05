@@ -1,6 +1,6 @@
 import { AppBar, Box, Button, Toolbar, Typography } from '@mui/material';
-import { Link } from '@toolpad/core/internal';
-
+import Link from '@mui/material/Link';
+import ztext_logo from '../../assets/ztext_logo.png'
 interface NavBarProps {
     signIn: () => void;
 }
@@ -10,13 +10,14 @@ const Navbar = ({ signIn }: NavBarProps) => {
         <AppBar position="static" color="primary" >
             <Toolbar>
                 {/* Logo */}
-                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                    MyApp
+                <Box component="img" src={ztext_logo} alt="Ztext Logo" sx={{ width: 50, height: 50 }} />
+                <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
+                    <Link href="#" underline="none" fontWeight={'bold'}>Ztext</Link>
                 </Typography>
 
                 {/* Sign In Button */}
                 <Box>
-                    <Button color="inherit" onClick={signIn} ><Link></Link>Sign In</Button>
+                    <Button color="inherit" onClick={signIn} sx={{ px: 2 }}>Sign In</Button>
                 </Box>
             </Toolbar>
         </AppBar>

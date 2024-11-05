@@ -35,8 +35,6 @@ export const useDB = () => {
                     postCategoryItem.push({ id: doc.id, ...postCategoryData })
                 });
                 setCategory(postCategoryItem)
-            } else {
-                console.error("User is not authenticated");
             }
         };
         getCategory()
@@ -59,7 +57,6 @@ export const useDB = () => {
                 return null;
             }
         } else {
-            console.error("User is not authenticated");
             return null;
         }
 
@@ -78,8 +75,6 @@ export const useDB = () => {
                     postItems.push({ id: doc.id, ...postData });
                 });
                 setAuthInfos(postItems);
-            } else {
-                console.error("User is not authenticated");
             }
         };
         getAuthInfos();

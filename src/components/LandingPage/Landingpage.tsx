@@ -40,7 +40,7 @@ const style = {
     border: '2px solid #000',
     boxShadow: 24,
     pb: 10,
-    borderRadius: 20
+    borderRadius: 5
 };
 
 const Landingpage = () => {
