@@ -1,9 +1,13 @@
 import { AppBar, Box, Button, Toolbar, Typography } from '@mui/material';
 import { Link } from '@toolpad/core/internal';
 
-const Navbar = () => {
+interface NavBarProps {
+    signIn: () => void;
+}
+
+const Navbar = ({ signIn }: NavBarProps) => {
     return (
-        <AppBar position="static" color="primary" sx={{ borderRadius: "60px" }}>
+        <AppBar position="static" color="primary" >
             <Toolbar>
                 {/* Logo */}
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
@@ -12,7 +16,7 @@ const Navbar = () => {
 
                 {/* Sign In Button */}
                 <Box>
-                    <Button color="inherit"><Link></Link>Sign In</Button>
+                    <Button color="inherit" onClick={signIn} ><Link></Link>Sign In</Button>
                 </Box>
             </Toolbar>
         </AppBar>

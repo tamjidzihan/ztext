@@ -2,7 +2,7 @@ import { AuthProvider, SignInPage } from '@toolpad/core'
 import { useAuth } from '../../hooks/useAuth';
 
 const providers: AuthProvider[] = [
-    { id: 'credentials', name: 'Email and password' },
+    // { id: 'credentials', name: 'Email and password' },
     { id: 'google', name: 'Google' },
     // { id: 'github', name: 'GitHub' },
     // { id: 'facebook', name: 'Facebook' },
