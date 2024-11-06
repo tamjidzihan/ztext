@@ -17,7 +17,7 @@ const Navbar = ({ signIn }: NavBarProps) => {
 
                 {/* Sign In Button */}
                 <Box>
-                    <Button color="inherit" onClick={signIn} sx={{ px: 2 }}>Sign In</Button>
+                    <Button onClick={signIn} size='large' sx={{ px: 2, backgroundColor: "secondary.main", color: "white" }}>Sign In</Button>
                 </Box>
             </Toolbar>
         </AppBar>
