@@ -6,7 +6,7 @@ import Email from "./PostCardComponents/Email";
 import Password from "./PostCardComponents/Password";
 import UserName from "./PostCardComponents/UserName";
 import OtherInfo from "./PostCardComponents/OtherInfo";
-import SettingsMenu from "./PostCardComponents/CardDropdown";
+import SettingsMenu from "./PostCardComponents/SettingsMenu";
 
 const modalStyle = {
     position: 'absolute' as const,
@@ -47,7 +47,6 @@ const PostCardModel: React.FC<PostCardModelProps> = ({ open, handleClose, email,
                     <CardHeader avatar={<CustomAvater avatar={website} />}
                         action={
                             <SettingsMenu
-                                onEdit={() => console.log("Edit clicked")}
                                 onDelete={onDelete}
                             />
                         }

@@ -10,7 +10,7 @@ import {
 import { useState } from "react";
 import CustomAvater from "../../theme/customization/CustomAvates";
 import PostCardModel from "./ModelPostCard";
-import SettingsMenu from "./PostCardComponents/CardDropdown";
+import SettingsMenu from "./PostCardComponents/SettingsMenu";
 import Email from "./PostCardComponents/Email";
 import Password from "./PostCardComponents/Password";
 import UserName from "./PostCardComponents/UserName";
@@ -51,7 +51,6 @@ export const PostCard = ({ email, password, userName, website, catagory, otherIn
 
                     action={
                         <SettingsMenu
-                            onEdit={() => console.log("Edit clicked")}
                             onDelete={onDelete}
                         />
                     }

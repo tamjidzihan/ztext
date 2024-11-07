@@ -1,4 +1,4 @@
-import { addDoc, collection, deleteDoc, doc, getDocs } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDocs, updateDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { authCollectionName, categoryCollection, db, userCollection } from "../firebase/FirebaseApp";
 import { useAuth } from "./useAuth";
@@ -88,6 +88,33 @@ export const useDB = () => {
     }, [user?.uid])
 
 
+    // Inside useDB hook
+    const updateAuthInfo = async (
+        id: string,
+        updatedData: Partial<AuthInfoProps>
+    ): Promise<AuthInfoProps | null> => {
+        if (user?.uid) {
+            try {
+                const docRef = doc(db, userCollection, user.uid, authCollectionName, id);
+                await updateDoc(docRef, updatedData);
+
+                // Update local state
+                setAuthInfos((prev) =>
+                    prev.map((authInfo) =>
+                        authInfo.id === id ? { ...authInfo, ...updatedData } : authInfo
+                    )
+                );
+                return { id, ...updatedData } as AuthInfoProps;
+            } catch (error) {
+                console.error("Error updating Auth Info:", error);
+                return null;
+            }
+        } else {
+            console.error("User is not authenticated");
+            return null;
+        }
+    };
+
     const postAuthInfo = async (
         //Follow this order Strictly as it is
         // website
@@ -148,8 +175,9 @@ export const useDB = () => {
         postCategory,
         deleteCategory,
 
-        setAuthInfos,
         authInfos,
+        setAuthInfos,
+        updateAuthInfo,
         deleteAuthInfo,
         postAuthInfo
     };
