@@ -1,6 +1,12 @@
-import { ContentCopyOutlined, MoreVert, Visibility, VisibilityOff } from "@mui/icons-material";
-import { Avatar, Box, Button, Card, CardContent, CardHeader, IconButton, Modal, TextField, Tooltip } from "@mui/material";
-import React, { useState } from "react";
+import { Box, Button, Card, CardContent, CardHeader, Modal, Typography } from "@mui/material";
+import React from "react";
+import CustomAvater from "../../theme/customization/CustomAvates";
+import { PostCardProps } from "./PostCard";
+import Email from "./PostCardComponents/Email";
+import Password from "./PostCardComponents/Password";
+import UserName from "./PostCardComponents/UserName";
+import OtherInfo from "./PostCardComponents/OtherInfo";
+import SettingsMenu from "./PostCardComponents/CardDropdown";
 
 const modalStyle = {
     position: 'absolute' as const,
@@ -13,31 +19,12 @@ const modalStyle = {
     borderRadius: "20px"
 };
 
-interface PostCardModelProps {
+interface PostCardModelProps extends PostCardProps {
     open: boolean;
-    email: string;
-    password: string;
     handleClose: () => void;
 }
 
-const PostCardModel: React.FC<PostCardModelProps> = ({ open, handleClose, email, password }) => {
-    const [copied, setCopied] = useState<string | null>(null);
-    const [passwordVisible, setPasswordVisible] = useState(false);
-    const handleCopy = async (item: string) => {
-        try {
-            await navigator.clipboard.writeText(item);
-            setCopied(item);
-            setTimeout(() => setCopied(null), 2000);
-        } catch (error) {
-            console.error("Failed to copy text", error);
-        }
-    };
-
-    const togglePasswordVisibility = () => {
-        setPasswordVisible((prev) => !prev);
-    };
-
-
+const PostCardModel: React.FC<PostCardModelProps> = ({ open, handleClose, email, password, userName, catagory, website, otherInfo, onDelete }) => {
 
     return (
         <Modal
@@ -57,124 +44,30 @@ const PostCardModel: React.FC<PostCardModelProps> = ({ open, handleClose, email,
                         p: 2
                     }}
                 >
-                    <CardHeader
-                        avatar={<Avatar aria-label="recipe">T</Avatar>}
-                        action={<IconButton aria-label="settings"><MoreVert /></IconButton>}
-                        title="Software Technologies"
-                        subheader="TypeScript"
+                    <CardHeader avatar={<CustomAvater avatar={website} />}
+                        action={
+                            <SettingsMenu
+                                onEdit={() => console.log("Edit clicked")}
+                                onDelete={onDelete}
+                            />
+                        }
+                        title={<Typography variant="h5">{website}</Typography>}
+                        subheader={catagory}
                     />
 
+
                     <CardContent>
-                        <Box
-                            component="form"
-                            sx={{ '& .MuiTextField-root': { width: '100%' } }}
-                            noValidate
-                            autoComplete="off"
-                        >
-                            <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-                                <TextField
-                                    value={email}
-                                    slotProps={{
-                                        input: { readOnly: true },
-                                    }}
-                                    id="input-email"
-                                    label="Email"
-                                    variant="standard"
-                                />
-                                <Tooltip title={copied === email ? "Copied!" : "Copy Email"} arrow>
-                                    <IconButton onClick={() => handleCopy(email)} color="primary" aria-label="copy email">
-                                        <ContentCopyOutlined sx={{ color: 'action.active' }} />
-                                    </IconButton>
-                                </Tooltip>
-                            </Box>
-                        </Box>
+                        <UserName userName={userName} />
+                    </CardContent>
+                    <CardContent>
+                        <Email email={email} />
+                    </CardContent>
+                    <CardContent>
+                        <Password password={password} />
                     </CardContent>
 
                     <CardContent>
-                        <Box
-                            component="form"
-                            sx={{ '& .MuiTextField-root': { width: '100%' } }}
-                            noValidate
-                            autoComplete="off"
-                        >
-                            <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-                                <TextField
-                                    value={password}
-                                    type={passwordVisible ? "text" : "password"}
-                                    slotProps={{
-                                        input: { readOnly: true },
-                                    }}
-                                    id="input-password"
-                                    label="Password"
-                                    variant="standard"
-                                />
-                                <Tooltip title={copied === password ? "Copied!" : "Copy Password"} arrow>
-                                    <IconButton onClick={() => handleCopy(password)} color="primary" aria-label="copy password">
-                                        <ContentCopyOutlined sx={{ color: 'action.active' }} />
-                                    </IconButton>
-                                </Tooltip>
-                                <IconButton onClick={togglePasswordVisibility} color="primary" aria-label="toggle password visibility">
-                                    {passwordVisible ? <VisibilityOff /> : <Visibility />}
-                                </IconButton>
-                            </Box>
-                        </Box>
-                    </CardContent>
-
-
-                    <CardContent>
-                        <Box
-                            component="form"
-                            sx={{ '& .MuiTextField-root': { width: '100%' } }}
-                            noValidate
-                            autoComplete="off"
-                        >
-                            <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-                                <TextField
-                                    value={email}
-                                    slotProps={{
-                                        input: { readOnly: true },
-                                    }}
-                                    id="input-email"
-                                    label="Email"
-                                    variant="standard"
-                                />
-                                <Tooltip title={copied === email ? "Copied!" : "Copy Email"} arrow>
-                                    <IconButton onClick={() => handleCopy(email)} color="primary" aria-label="copy email">
-                                        <ContentCopyOutlined sx={{ color: 'action.active' }} />
-                                    </IconButton>
-                                </Tooltip>
-                            </Box>
-                        </Box>
-                    </CardContent>
-
-                    <CardContent>
-                        <Box
-                            component="form"
-                            sx={{ '& .MuiTextField-root': { width: '100%' } }}
-                            noValidate
-                            autoComplete="off"
-                        >
-                            <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-                                <TextField
-                                    value={password}
-                                    type={passwordVisible ? "text" : "password"}
-                                    slotProps={{
-                                        input: { readOnly: true },
-                                    }}
-                                    id="input-password"
-                                    label="Password"
-                                    variant="standard"
-                                />
-                                <Tooltip title={copied === password ? "Copied!" : "Copy Password"} arrow>
-                                    <IconButton onClick={() => handleCopy(password)} color="primary" aria-label="copy password">
-                                        <ContentCopyOutlined sx={{ color: 'action.active' }} />
-                                    </IconButton>
-                                </Tooltip>
-                                <IconButton onClick={togglePasswordVisibility} color="primary" aria-label="toggle password visibility">
-                                    {passwordVisible ? <VisibilityOff /> : <Visibility />}
-                                </IconButton>
-                            </Box>
-                        </Box>
+                        <OtherInfo otheInfo={otherInfo} />
                     </CardContent>
 
                     <Box

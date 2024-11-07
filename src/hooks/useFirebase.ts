@@ -59,9 +59,16 @@ export const useDB = () => {
         } else {
             return null;
         }
-
     }
 
+    const deleteCategory = async (id: string) => {
+        if (user?.uid) {
+            await deleteDoc(doc(db, categoryCollection, id));
+            setCategory(authInfos.filter(category => category.id !== id));
+        } else {
+            console.error("Cannot delete, user is not authenticated");
+        }
+    };
 
 
     // CURD FOR Auth Info
@@ -135,5 +142,15 @@ export const useDB = () => {
         }
     };
 
-    return { category, postCategory, authInfos, deleteAuthInfo, setAuthInfos, postAuthInfo };
+    return {
+        setCategory,
+        category,
+        postCategory,
+        deleteCategory,
+
+        setAuthInfos,
+        authInfos,
+        deleteAuthInfo,
+        postAuthInfo
+    };
 }

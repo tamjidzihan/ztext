@@ -81,16 +81,7 @@ const CreateAuthInfoPage: React.FC = () => {
                 Authentication Information
             </Typography>
             <form onSubmit={handleSubmit} style={{ width: '100%' }}>
-                <TextField
-                    required
-                    label="Website Name"
-                    variant="outlined"
-                    fullWidth
-                    name="website"
-                    value={formData.website}
-                    onChange={handleChange}
-                    sx={{ mb: 2 }}
-                />
+
                 {/* Dropdown for Category */}
                 <Select
                     fullWidth
@@ -111,6 +102,16 @@ const CreateAuthInfoPage: React.FC = () => {
                 </Select>
 
 
+                <TextField
+                    required
+                    label="Website Name"
+                    variant="outlined"
+                    fullWidth
+                    name="website"
+                    value={formData.website}
+                    onChange={handleChange}
+                    sx={{ mb: 2 }}
+                />
                 <TextField
                     label="Username"
                     variant="outlined"

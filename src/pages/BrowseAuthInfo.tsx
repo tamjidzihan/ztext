@@ -4,7 +4,7 @@ import { Box } from '@mui/material';
 import { useDB } from '../hooks/useFirebase';
 
 const BrowseAuthInfo = () => {
-    const { authInfos, category } = useDB()
+    const { authInfos, category, deleteAuthInfo } = useDB()
 
     const getCategoryName = (categoryId: string) => {
         return category.find((cat) => cat.id === categoryId)?.category || 'Unknown Category';
@@ -20,7 +20,10 @@ const BrowseAuthInfo = () => {
                             website={data.website}
                             email={data.email}
                             password={data.password}
-                            userName={data.username} />
+                            userName={data.username}
+                            otherInfo={data.otherInfo}
+                            onDelete={() => deleteAuthInfo(data.id)}
+                        />
                     </Grid>
                 )
                 }

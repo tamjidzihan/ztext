@@ -1,35 +1,35 @@
 import {
-    MoreVert
-} from "@mui/icons-material";
-import {
-    Avatar,
     Box,
     Button,
     Card,
     CardContent,
     CardHeader,
-    IconButton,
     Typography
 } from "@mui/material";
+// import Avatar from '@mui/material/Avatar';
 import { useState } from "react";
-import Email from "./Email";
+import CustomAvater from "../../theme/customization/CustomAvates";
 import PostCardModel from "./ModelPostCard";
-import Password from "./Password";
-import UserName from "./UserName";
+import SettingsMenu from "./PostCardComponents/CardDropdown";
+import Email from "./PostCardComponents/Email";
+import Password from "./PostCardComponents/Password";
+import UserName from "./PostCardComponents/UserName";
 
-interface EmailCardProps {
+export interface PostCardProps {
     website: string;
     email: string;
     password: string;
     userName: string;
-    catagory: string
+    catagory: string;
+    otherInfo: string;
+    onDelete: () => void;
 }
 
-export const PostCard = ({ email, password, userName, website, catagory }: EmailCardProps) => {
+export const PostCard = ({ email, password, userName, website, catagory, otherInfo, onDelete }: PostCardProps) => {
     const [open, setOpen] = useState(false);
+
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-
 
     return (
         <>
@@ -43,12 +43,23 @@ export const PostCard = ({ email, password, userName, website, catagory }: Email
                     }
                 }} >
                 <CardHeader
-                    avatar={<Avatar aria-label="recipe" onClick={handleOpen}>T</Avatar>}
-                    action={<IconButton aria-label="settings"><MoreVert /></IconButton>}
+                    avatar={
+                        <Box onClick={handleOpen}>
+                            <CustomAvater avatar={website} />
+                        </Box>
+                    }
+
+                    action={
+                        <SettingsMenu
+                            onEdit={() => console.log("Edit clicked")}
+                            onDelete={onDelete}
+                        />
+                    }
                     title={<Typography onClick={handleOpen} variant="h5">{website}</Typography>}
                     subheader={catagory}
                     sx={{ cursor: 'pointer' }}
                 />
+
                 <CardContent>
                     <UserName userName={userName} />
                 </CardContent>
@@ -80,10 +91,15 @@ export const PostCard = ({ email, password, userName, website, catagory }: Email
 
             {/* Modal Component */}
             <PostCardModel
-                open={open}
-                handleClose={handleClose}
+                catagory={catagory}
+                website={website}
+                userName={userName}
                 email={email}
                 password={password}
+                otherInfo={otherInfo}
+                open={open}
+                handleClose={handleClose}
+                onDelete={onDelete}
             />
         </>
     );
