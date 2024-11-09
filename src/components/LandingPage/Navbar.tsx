@@ -17,7 +17,7 @@ const Navbar = ({ signIn }: NavBarProps) => {
 
                 {/* Sign In Button */}
                 <Box>
-                    <Button variant="contained" color="secondary" size="large" onClick={signIn}>Sign In</Button>
+                    <Button variant="contained" color="secondary" size="large" onClick={signIn} sx={{ fontWeight: "bold" }}>Sign In</Button>
                 </Box>
             </Toolbar>
         </AppBar>

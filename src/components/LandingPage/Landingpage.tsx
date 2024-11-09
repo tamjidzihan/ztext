@@ -120,7 +120,7 @@ const Landingpage = () => {
                     <Typography variant="h4" gutterBottom>What Our Users Say</Typography>
                     <Grid container spacing={4} justifyContent="center">
                         {testimonials.map((testimonial, index) => (
-                            <Grid key={index} size={6} >
+                            <Grid key={index} size={{ sm: 12, md: 6 }} >
                                 <Card sx={{ p: 3, borderRadius: 2, height: '100%' }}>
                                     <Typography variant="body1" gutterBottom>
                                         "{testimonial.quote}"
@@ -164,21 +164,21 @@ const Landingpage = () => {
                 <Box sx={{ mb: 8 }}>
                     <Typography variant="h4" align="center" gutterBottom>Why Choose Us?</Typography>
                     <Grid container spacing={4} justifyContent="center">
-                        <Grid size={3} textAlign="center">
+                        <Grid size={{ sm: 12, md: 4 }} textAlign="center">
                             <StarIcon color="primary" sx={{ fontSize: 60, mb: 1 }} />
                             <Typography variant="h6" gutterBottom>Top Ratings</Typography>
                             <Typography variant="body2">
                                 Consistently rated as one of the most secure password managers.
                             </Typography>
                         </Grid>
-                        <Grid size={3} textAlign="center">
+                        <Grid size={{ sm: 12, md: 4 }} textAlign="center">
                             <ContactSupportIcon color="secondary" sx={{ fontSize: 60, mb: 1 }} />
                             <Typography variant="h6" gutterBottom>24/7 Support</Typography>
                             <Typography variant="body2">
                                 Our support team is available anytime you need assistance.
                             </Typography>
                         </Grid>
-                        <Grid size={3} textAlign="center">
+                        <Grid size={{ sm: 12, md: 4 }} textAlign="center">
                             <PeopleIcon color="success" sx={{ fontSize: 60, mb: 1 }} />
                             <Typography variant="h6" gutterBottom>Trusted by Experts</Typography>
                             <Typography variant="body2">
@@ -189,11 +189,23 @@ const Landingpage = () => {
                 </Box>
 
                 {/* Call to Action */}
-                <Box sx={{ textAlign: 'center', py: 6, bgcolor: 'secondary.main', color: 'white', borderRadius: 2, mb: 6 }}>
+                <Box
+                    sx={{
+                        textAlign: 'center',
+                        py: 6,
+                        color: 'white',
+                        borderRadius: 2,
+                        mb: 6,
+                        background: 'linear-gradient(45deg, #f44369, #3e3b92)',
+                        backgroundSize: '200% 200%',
+                        animation: `${gradientAnimation} 8s ease infinite`,
+                    }}
+                >
                     <Typography variant="h4" gutterBottom>Ready to Secure Your Online Identity?</Typography>
                     <Typography variant="h6" sx={{ mb: 4 }}>Join thousands of users already taking control of their security.</Typography>
                     <Button onClick={handleOpen} variant="contained" color="primary" size="large">Sign Up Today</Button>
                 </Box>
+
 
 
                 <Modal
