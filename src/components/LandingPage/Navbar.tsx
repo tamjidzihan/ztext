@@ -12,12 +12,12 @@ const Navbar = ({ signIn }: NavBarProps) => {
                 {/* Logo */}
                 <Box component="img" src={ztext_logo} alt="Ztext Logo" sx={{ width: 50, height: 50 }} />
                 <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-                    <Link href="#" underline="none" fontWeight={'bold'}>Ztext</Link>
+                    <Link href="#" underline="none" fontWeight={'bold'} sx={{ color: "white" }}>Ztext</Link>
                 </Typography>
 
                 {/* Sign In Button */}
                 <Box>
-                    <Button onClick={signIn} size='large' sx={{ px: 2, backgroundColor: "secondary.main", color: "white" }}>Sign In</Button>
+                    <Button variant="contained" color="secondary" size="large" onClick={signIn}>Sign In</Button>
                 </Box>
             </Toolbar>
         </AppBar>

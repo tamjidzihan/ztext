@@ -1,4 +1,4 @@
-import { Box, Button, Card, Typography, Container, Modal } from '@mui/material';
+import { Box, Button, Card, Typography, Container, Modal, keyframes } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import LockIcon from '@mui/icons-material/Lock';
 import GroupIcon from '@mui/icons-material/Group';
@@ -43,6 +43,14 @@ const style = {
     borderRadius: 5
 };
 
+
+const gradientAnimation = keyframes`
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+`;
+
+
 const Landingpage = () => {
 
     const [open, setOpen] = React.useState(false);
@@ -54,22 +62,31 @@ const Landingpage = () => {
         <>
             <Navbar signIn={handleOpen} />
             <Container maxWidth="lg">
-                <Box sx={{ mb: 3, mt: 1 }}>
-
+                <Box sx={{ mb: 3, mt: 5 }}>
+                    {/* Hero Section */}
+                    <Box
+                        sx={{
+                            textAlign: 'center',
+                            py: 10,
+                            color: 'white',
+                            borderRadius: 2,
+                            mb: 6,
+                            background: 'linear-gradient(45deg, #f44369, #242acf)',
+                            backgroundSize: '200% 200%',
+                            animation: `${gradientAnimation} 8s ease infinite`
+                        }}
+                    >
+                        <Typography variant="h2" gutterBottom>Secure Your Passwords Effortlessly</Typography>
+                        <Typography variant="h6" sx={{ mb: 4 }}>
+                            Manage and protect your digital identity with cutting-edge security.
+                        </Typography>
+                        <Button variant="contained" color="secondary" size="large" onClick={handleOpen}>Get Started for Free</Button>
+                    </Box>
                 </Box>
-                {/* Hero Section */}
-                <Box sx={{ textAlign: 'center', py: 10, bgcolor: 'primary.main', color: 'white', borderRadius: 2, mb: 6 }}>
-                    <Typography variant="h2" gutterBottom>Secure Your Passwords Effortlessly</Typography>
-                    <Typography variant="h6" sx={{ mb: 4 }}>
-                        Manage and protect your digital identity with cutting-edge security.
-                    </Typography>
-                    <Button variant="contained" color="secondary" size="large" onClick={handleOpen}>Get Started for Free</Button>
-                </Box>
-
                 {/* Features Section */}
                 <Typography variant="h4" align="center" sx={{ mb: 4 }}>Key Features</Typography>
                 <Grid container spacing={4} sx={{ mb: 8 }}>
-                    <Grid size={4} >
+                    <Grid size={{ sm: 12, md: 4 }} >
                         <Card sx={{ textAlign: 'center', p: 4 }}>
                             <SecurityIcon color="primary" sx={{ fontSize: 80, mb: 2 }} />
                             <Typography variant="h5" gutterBottom>Top-notch Security</Typography>
@@ -78,7 +95,7 @@ const Landingpage = () => {
                             </Typography>
                         </Card>
                     </Grid>
-                    <Grid size={4} >
+                    <Grid size={{ sm: 12, md: 4 }} >
                         <Card sx={{ textAlign: 'center', p: 4 }}>
                             <LockIcon color="secondary" sx={{ fontSize: 80, mb: 2 }} />
                             <Typography variant="h5" gutterBottom>Easy to Use</Typography>
@@ -87,7 +104,7 @@ const Landingpage = () => {
                             </Typography>
                         </Card>
                     </Grid>
-                    <Grid size={4} >
+                    <Grid size={{ sm: 12, md: 4 }} >
                         <Card sx={{ textAlign: 'center', p: 4 }}>
                             <GroupIcon color="success" sx={{ fontSize: 80, mb: 2 }} />
                             <Typography variant="h5" gutterBottom>Community Trusted</Typography>
