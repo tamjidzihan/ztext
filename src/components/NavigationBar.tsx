@@ -1,13 +1,9 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { CategoryRounded, Toc } from '@mui/icons-material';
-import SpeakerNotesIcon from '@mui/icons-material/SpeakerNotes';
 import BrowserUpdatedIcon from '@mui/icons-material/BrowserUpdated';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import NoteAddIcon from '@mui/icons-material/NoteAdd';
 import PageviewIcon from '@mui/icons-material/Pageview';
 import { Navigation } from '@toolpad/core/AppProvider';
-import { useEffect, useState } from 'react';
-import { useDB } from '../hooks/useFirebase';
 
 
 // Define the base navigation items
@@ -56,31 +52,3 @@ export const NAVIGATION: Navigation = [
     },
 ];
 
-export const useDynamicNavigation = () => {
-    const { category } = useDB();
-    const [dynamicNavigation, setDynamicNavigation] = useState<Navigation>(NAVIGATION);
-
-    useEffect(() => {
-        // Create the category children array with random icons
-        const categoryChildren = category.map((cat) => ({
-            segment: cat.id,
-            title: cat.category,
-            icon: <SpeakerNotesIcon />,
-        }));
-
-        // Update the navigation structure to include dynamic categories
-        const updatedNavigation = {
-            ...dynamicNavigation[dynamicNavigation.length - 1], // Get the last item (the Browse Category item)
-            children: categoryChildren, // Insert dynamically created categories
-        };
-
-        // Update the dynamicNavigation state
-        setDynamicNavigation((prev) => {
-            const navigationCopy = [...prev];
-            navigationCopy[navigationCopy.length - 1] = updatedNavigation; // Replace last item with updated
-            return navigationCopy;
-        });
-    }, [category]);
-
-    return dynamicNavigation;
-};

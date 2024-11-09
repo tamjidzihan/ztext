@@ -14,7 +14,7 @@ const BrowseAuthInfo = () => {
         <Box>
             <Grid container spacing={2}>
                 {authInfos.map((data, index) =>
-                    <Grid size={{ sm: 12, md: 6, lg: 4 }} mb={3} key={index}>
+                    <Grid size={{ sm: 12, md: 6, lg: 4 }} mb={3} key={index + 1}>
                         <PostCard
                             catagory={getCategoryName(data.category)}
                             website={data.website}

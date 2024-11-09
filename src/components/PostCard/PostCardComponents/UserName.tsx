@@ -32,7 +32,6 @@ const UserName = ({ userName }: UserNameProps) => {
                     slotProps={{
                         input: { readOnly: true },
                     }}
-                    id="input-userName"
                     label="UserName"
                     variant="standard"
                 />

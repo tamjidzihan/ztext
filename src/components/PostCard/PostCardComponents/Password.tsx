@@ -40,7 +40,6 @@ const Password = ({ password }: PasswordProps) => {
                     slotProps={{
                         input: { readOnly: true },
                     }}
-                    id="input-password"
                     label="Password"
                     variant="standard"
                 />

@@ -33,7 +33,6 @@ const Email = ({ email }: EmailProps) => {
                     slotProps={{
                         input: { readOnly: true },
                     }}
-                    id="input-email"
                     label="Email"
                     variant="standard"
                 />

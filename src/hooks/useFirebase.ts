@@ -1,6 +1,6 @@
 import { addDoc, collection, deleteDoc, doc, getDocs, updateDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { authCollectionName, categoryCollection, db, userCollection } from "../firebase/FirebaseApp";
+import { authCollectionName, categoryCollectionName, db, userCollectionName } from "../firebase/FirebaseApp";
 import { useAuth } from "./useAuth";
 
 export interface AuthInfoProps {
@@ -25,10 +25,11 @@ export const useDB = () => {
 
 
     // CURD FOR Auth Category
+    //GET Category
     useEffect(() => {
         const getCategory = async () => {
             if (user?.uid) {
-                const querySnapshot = await getDocs(collection(db, categoryCollection));
+                const querySnapshot = await getDocs(collection(db, userCollectionName, user?.uid, categoryCollectionName));
                 const postCategoryItem: CategoryProps[] = [];
                 querySnapshot.forEach((doc) => {
                     const postCategoryData = doc.data() as Omit<CategoryProps, 'id'>;
@@ -40,12 +41,13 @@ export const useDB = () => {
         getCategory()
     }, [user?.uid])
 
+    //POST Category
     const postCategory = async (
         category: string
     ): Promise<CategoryProps | null> => {
         if (user?.uid) {
             try {
-                const docRef = await addDoc(collection(db, categoryCollection), {
+                const docRef = await addDoc(collection(db, userCollectionName, user?.uid, categoryCollectionName), {
                     category: category
                 });
                 return {
@@ -61,9 +63,10 @@ export const useDB = () => {
         }
     }
 
+    //DELETE Category
     const deleteCategory = async (id: string) => {
         if (user?.uid) {
-            await deleteDoc(doc(db, categoryCollection, id));
+            await deleteDoc(doc(db, userCollectionName, user?.uid, categoryCollectionName, id));
             setCategory(authInfos.filter(category => category.id !== id));
         } else {
             console.error("Cannot delete, user is not authenticated");
@@ -72,10 +75,11 @@ export const useDB = () => {
 
 
     // CURD FOR Auth Info
+    //GET AUTH INFO
     useEffect(() => {
         const getAuthInfos = async () => {
             if (user?.uid) {
-                const querySnapshot = await getDocs(collection(db, userCollection, user?.uid, authCollectionName));
+                const querySnapshot = await getDocs(collection(db, userCollectionName, user?.uid, authCollectionName));
                 const postItems: AuthInfoProps[] = [];
                 querySnapshot.forEach((doc) => {
                     const postData = doc.data() as Omit<AuthInfoProps, 'id'>;
@@ -88,14 +92,14 @@ export const useDB = () => {
     }, [user?.uid])
 
 
-    // Inside useDB hook
+    // UPDATE AUTH INFO
     const updateAuthInfo = async (
         id: string,
         updatedData: Partial<AuthInfoProps>
     ): Promise<AuthInfoProps | null> => {
         if (user?.uid) {
             try {
-                const docRef = doc(db, userCollection, user.uid, authCollectionName, id);
+                const docRef = doc(db, userCollectionName, user.uid, authCollectionName, id);
                 await updateDoc(docRef, updatedData);
 
                 // Update local state
@@ -115,6 +119,7 @@ export const useDB = () => {
         }
     };
 
+    //POST AUTH INFO
     const postAuthInfo = async (
         //Follow this order Strictly as it is
         // website
@@ -132,7 +137,7 @@ export const useDB = () => {
     ): Promise<AuthInfoProps | null> => {
         if (user?.uid) {
             try {
-                const docRef = await addDoc(collection(db, userCollection, user.uid, authCollectionName), {
+                const docRef = await addDoc(collection(db, userCollectionName, user.uid, authCollectionName), {
                     username: userName,
                     category: category,
                     email: email,
@@ -160,9 +165,10 @@ export const useDB = () => {
         }
     };
 
+    //DELETE AUTH INFO
     const deleteAuthInfo = async (id: string) => {
         if (user?.uid) {
-            await deleteDoc(doc(db, userCollection, user.uid, authCollectionName, id));
+            await deleteDoc(doc(db, userCollectionName, user.uid, authCollectionName, id));
             setAuthInfos(authInfos.filter(authInfo => authInfo.id !== id));
         } else {
             console.error("Cannot delete, user is not authenticated");
