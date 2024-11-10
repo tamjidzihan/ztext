@@ -51,6 +51,7 @@ export const PostCard = ({ email, password, userName, website, catagory, otherIn
 
                     action={
                         <SettingsMenu
+                            onEdit={() => console.log("Edit clicked")}
                             onDelete={onDelete}
                         />
                     }
