@@ -47,6 +47,7 @@ const PostCardModel: React.FC<PostCardModelProps> = ({ open, handleClose, email,
                     <CardHeader avatar={<CustomAvater avatar={website} />}
                         action={
                             <SettingsMenu
+                                onEdit={() => console.log("Edit clicked")}
                                 onDelete={onDelete}
                             />
                         }

@@ -1,4 +1,4 @@
-import { addDoc, collection, deleteDoc, doc, getDocs, updateDoc } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, updateDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { authCollectionName, categoryCollectionName, db, userCollectionName } from "../firebase/FirebaseApp";
 import { useAuth } from "./useAuth";
@@ -92,6 +92,29 @@ export const useDB = () => {
     }, [user?.uid])
 
 
+
+    const fetchAuthInfo = async (id: string): Promise<AuthInfoProps | null> => {
+        if (user?.uid) {
+            try {
+                const docRef = doc(db, userCollectionName, user.uid, authCollectionName, id);
+                const docSnap = await getDoc(docRef);
+                if (docSnap.exists()) {
+                    return { id: docSnap.id, ...docSnap.data() } as AuthInfoProps;
+                } else {
+                    console.error("No such document!");
+                    return null;
+                }
+            } catch (error) {
+                console.error("Error fetching Auth Info:", error);
+                return null;
+            }
+        } else {
+            console.error("User is not authenticated");
+            return null;
+        }
+    };
+
+
     // UPDATE AUTH INFO
     const updateAuthInfo = async (
         id: string,
@@ -183,6 +206,7 @@ export const useDB = () => {
 
         authInfos,
         setAuthInfos,
+        fetchAuthInfo,
         updateAuthInfo,
         deleteAuthInfo,
         postAuthInfo

@@ -4,9 +4,10 @@ import { MoreVert } from "@mui/icons-material";
 
 interface SettingsMenuProps {
   onDelete: () => void;
+  onEdit: () => void;
 }
 
-const SettingsMenu: React.FC<SettingsMenuProps> = ({ onDelete }) => {
+const SettingsMenu: React.FC<SettingsMenuProps> = ({ onDelete, onEdit }: SettingsMenuProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const handleMenuClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -27,6 +28,7 @@ const SettingsMenu: React.FC<SettingsMenuProps> = ({ onDelete }) => {
         open={Boolean(anchorEl)}
         onClose={handleMenuClose}
       >
+        <MenuItem onClick={() => { handleMenuClose(); onEdit(); }}>Edit</MenuItem>
         <MenuItem onClick={() => { handleMenuClose(); onDelete(); }}>Delete</MenuItem>
       </Menu>
     </>
