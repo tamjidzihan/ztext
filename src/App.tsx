@@ -37,6 +37,8 @@ const App = () => {
   };
 
   if (loading) return <Loading />;
+  console.log(user?.displayName);
+
 
   return (
     <AppProvider

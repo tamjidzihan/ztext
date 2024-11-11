@@ -92,8 +92,8 @@ export const useDB = () => {
     }, [user?.uid])
 
 
-
-    const fetchAuthInfo = async (id: string): Promise<AuthInfoProps | null> => {
+    //GET AUTH INFO BYID
+    const getAuthInfoById = async (id: string): Promise<AuthInfoProps | null> => {
         if (user?.uid) {
             try {
                 const docRef = doc(db, userCollectionName, user.uid, authCollectionName, id);
@@ -113,6 +113,8 @@ export const useDB = () => {
             return null;
         }
     };
+
+
 
 
     // UPDATE AUTH INFO
@@ -206,7 +208,7 @@ export const useDB = () => {
 
         authInfos,
         setAuthInfos,
-        fetchAuthInfo,
+        getAuthInfoById,
         updateAuthInfo,
         deleteAuthInfo,
         postAuthInfo

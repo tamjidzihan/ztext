@@ -16,6 +16,7 @@ import Password from "./PostCardComponents/Password";
 import UserName from "./PostCardComponents/UserName";
 
 export interface PostCardProps {
+    authInfoId: string;
     website: string;
     email: string;
     password: string;
@@ -23,9 +24,10 @@ export interface PostCardProps {
     catagory: string;
     otherInfo: string;
     onDelete: () => void;
+    onEdit: (authInfoId: string) => void;
 }
 
-export const PostCard = ({ email, password, userName, website, catagory, otherInfo, onDelete }: PostCardProps) => {
+export const PostCard = ({ authInfoId, email, password, userName, website, catagory, otherInfo, onDelete, onEdit }: PostCardProps) => {
     const [open, setOpen] = useState(false);
 
     const handleOpen = () => setOpen(true);
@@ -51,7 +53,7 @@ export const PostCard = ({ email, password, userName, website, catagory, otherIn
 
                     action={
                         <SettingsMenu
-                            onEdit={() => console.log("Edit clicked")}
+                            onEdit={() => onEdit(authInfoId)}
                             onDelete={onDelete}
                         />
                     }
@@ -91,6 +93,7 @@ export const PostCard = ({ email, password, userName, website, catagory, otherIn
 
             {/* Modal Component */}
             <PostCardModel
+                authInfoId={authInfoId}
                 catagory={catagory}
                 website={website}
                 userName={userName}
@@ -100,6 +103,7 @@ export const PostCard = ({ email, password, userName, website, catagory, otherIn
                 open={open}
                 handleClose={handleClose}
                 onDelete={onDelete}
+                onEdit={onEdit}
             />
         </>
     );

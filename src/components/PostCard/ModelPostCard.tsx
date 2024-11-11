@@ -24,7 +24,7 @@ interface PostCardModelProps extends PostCardProps {
     handleClose: () => void;
 }
 
-const PostCardModel: React.FC<PostCardModelProps> = ({ open, handleClose, email, password, userName, catagory, website, otherInfo, onDelete }) => {
+const PostCardModel: React.FC<PostCardModelProps> = ({ open, handleClose, authInfoId, email, password, userName, catagory, website, otherInfo, onDelete, onEdit }) => {
 
     return (
         <Modal
@@ -47,7 +47,7 @@ const PostCardModel: React.FC<PostCardModelProps> = ({ open, handleClose, email,
                     <CardHeader avatar={<CustomAvater avatar={website} />}
                         action={
                             <SettingsMenu
-                                onEdit={() => console.log("Edit clicked")}
+                                onEdit={() => onEdit(authInfoId)}
                                 onDelete={onDelete}
                             />
                         }
