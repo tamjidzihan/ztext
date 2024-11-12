@@ -1,37 +1,58 @@
 import { useEffect, useState } from "react";
-import { Box, TextField, Button } from "@mui/material";
-import { AuthInfoProps, useDB } from "../hooks/useFirebase"; // Assuming this hook allows you to fetch AuthInfo
-// import { PostCardProps } from "../components/PostCard/PostCard"; // Assuming you use this interface for AuthInfo
+import { Box, TextField, Button, CircularProgress } from "@mui/material";
+import { AuthInfoProps, useDB } from "../hooks/useFirebase";
+import { useAuth } from "../hooks/useAuth";
 
 interface EditAuthInfoPageProps {
     authInfoId: string;
     onClose: () => void;
+    addNewAuthInfos: (newAuthinfo: AuthInfoProps) => void;
 }
 
-const EditAuthInfoPage = ({ authInfoId, onClose }: EditAuthInfoPageProps) => {
-    const { getAuthInfoById, updateAuthInfo } = useDB(); // Assuming you have this function in your useDB hook
+const EditAuthInfoPage = ({ authInfoId, onClose, addNewAuthInfos }: EditAuthInfoPageProps) => {
+    const { user } = useAuth();
+    const { getAuthInfoById, updateAuthInfo } = useDB();
+    const [loading, setLoading] = useState(true);
     const [authInfo, setAuthInfo] = useState<AuthInfoProps | null>(null);
 
     useEffect(() => {
-        // Fetch the AuthInfo data based on authInfoId
+
+        // Fetch auth info if user is authenticated
         const fetchAuthInfo = async () => {
-            const data = getAuthInfoById(authInfoId);
-            setAuthInfo(await data);
+            try {
+                const data = await getAuthInfoById(authInfoId);
+                setAuthInfo(data);
+            } catch (error) {
+                console.error("Error fetching auth info:", error);
+            } finally {
+                setLoading(false);
+            }
         };
 
         fetchAuthInfo();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [authInfoId]);
+    }, [user, authInfoId, setAuthInfo]);
 
-    const handleSave = () => {
+
+    const handleSave = async () => {
         if (authInfo) {
-            updateAuthInfo(authInfoId, authInfo); // Assuming this updates the data
-            onClose(); // Close the edit page after saving
+            try {
+                await updateAuthInfo(authInfoId, authInfo);
+                addNewAuthInfos(authInfo); // Pass the updated authInfo back to parent
+                onClose(); // Close modal after saving
+            } catch (error) {
+                console.error("Error updating auth info:", error);
+            }
         }
     };
 
+
+    if (loading && !authInfo) {
+        return <CircularProgress />;
+    }
+
     if (!authInfo) {
-        return <div>Loading...</div>; // Or display a loading spinner
+        return <CircularProgress />;
     }
 
     return (

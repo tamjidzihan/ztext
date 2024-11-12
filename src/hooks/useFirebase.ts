@@ -109,7 +109,6 @@ export const useDB = () => {
                 return null;
             }
         } else {
-            console.error("User is not authenticated");
             return null;
         }
     };
@@ -139,7 +138,6 @@ export const useDB = () => {
                 return null;
             }
         } else {
-            console.error("User is not authenticated");
             return null;
         }
     };
