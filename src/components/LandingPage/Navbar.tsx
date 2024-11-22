@@ -12,7 +12,7 @@ const Navbar = ({ signIn }: NavBarProps) => {
                 {/* Logo */}
                 <Box component="img" src={ztext_logo} alt="Ztext Logo" sx={{ width: 50, height: 50 }} />
                 <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-                    <Link href="#" underline="none" fontWeight={'bold'} sx={{ color: "white" }}>Ztext</Link>
+                    <Link href="#" underline="none" fontWeight={'bold'} sx={{ color: "white" }}>Auth Manager</Link>
                 </Typography>
 
                 {/* Sign In Button */}
