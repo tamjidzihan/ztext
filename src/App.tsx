@@ -1,8 +1,10 @@
 import { AppProvider, AuthenticationContext, SessionContext } from '@toolpad/core/AppProvider';
 import { DashboardLayout } from '@toolpad/core/DashboardLayout';
 import { PageContainer } from '@toolpad/core/PageContainer';
+import Landingpage from './components/LandingPage/Landingpage';
 import Loading from './components/Loading';
 import { useAuth } from './hooks/useAuth';
+import { useDynamicNavigation } from './hooks/useDynamicNavigation';
 import AuthInfo from './pages/BrowseAuthInfo';
 import CreateAuthInfoPage from './pages/CreateAuthInfoPage';
 import CreateCategoryPage from './pages/CreateCategoryPage';
@@ -12,8 +14,6 @@ import SearchPage from './pages/SearchPage';
 import { useRouter } from './router/router';
 import { branding } from './theme/Branding';
 import { CustomTheme } from './theme/Theme';
-import Landingpage from './components/LandingPage/Landingpage';
-import { useDynamicNavigation } from './hooks/useDynamicNavigation';
 
 const App = () => {
   const { user, loading, signInWithGoogle, logOut } = useAuth();
